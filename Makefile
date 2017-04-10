@@ -23,7 +23,7 @@ EMACSBATCH = $(EMACS) -batch -no-site-file -no-init-file
 
 ## Inno Setup info
 INNOSCRIPT=emacs-modified.iss
-INNOSETUP=c:/progra~1/innose~1/iscc.exe
+INNOSETUP="c:/Program Files (x86)/Inno Setup 5/iscc.exe"
 INFOBEFOREFR=InfoBefore-fr.txt
 INFOBEFOREEN=InfoBefore-en.txt
 

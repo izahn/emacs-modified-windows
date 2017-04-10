@@ -41,5 +41,5 @@ ARCH=i686-w64-mingw32
 ZIPFILE=emacs-${EMACSVERSION}$(if ${EMACSPATCHLEVEL},-${EMACSPATCHLEVEL},)-${ARCH}.zip
 
 ## GitHub repository and authentication
-REPOSURL=https://api.github.com/repos/vigou3/emacs-modified-windows
+REPOSURL=https://api.github.com/repos/izahn/emacs-modified-windows
 OAUTHTOKEN=$(shell cat ~/.github/token)
