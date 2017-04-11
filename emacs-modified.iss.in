@@ -2,10 +2,10 @@
 AppName=GNU Emacs
 AppVerName=GNU Emacs <VERSION>
 AppId=GNUEmacs<VERSION>
-AppPublisher=Vincent Goulet
-AppPublisherURL=http://vgoulet.act.ulaval.ca/emacs
-AppSupportURL=http://vgoulet.act.ulaval.ca/emacs
-AppUpdatesURL=http://vgoulet.act.ulaval.ca/emacs
+AppPublisher=Ista Zahn
+AppPublisherURL=https://github.com/izahn/emacs-modified-windows
+AppSupportURL=https://github.com/izahn/emacs-modified-windows
+AppUpdatesURL=https://github.com/izahn/emacs-modified-windows
 DefaultDirName={pf}\GNU Emacs <EMACSVERSION>
 DefaultGroupName=GNU Emacs <EMACSVERSION>
 LicenseFile=emacs-bin\share\emacs\<EMACSVERSION>\etc\COPYING
@@ -18,7 +18,6 @@ PrivilegesRequired=none
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl";
-Name: "basque"; MessagesFile: "compiler:Languages\Basque.isl"
 Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
 Name: "catalan"; MessagesFile: "compiler:Languages\Catalan.isl"
 Name: "czech"; MessagesFile: "compiler:Languages\Czech.isl"
@@ -33,7 +32,6 @@ Name: "norwegian"; MessagesFile: "compiler:Languages\Norwegian.isl"
 Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
 Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
-Name: "slovak"; MessagesFile: "compiler:Languages\Slovak.isl"
 Name: "slovenian"; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
