@@ -72,6 +72,10 @@ dir :
 	$(EMACSBATCH) -f batch-byte-compile ${SITELISP}/htmlize.el
 	cp -p htmlize-view.el ${SITELISP}/
 	$(EMACSBATCH) -f batch-byte-compile ${SITELISP}/htmlize-view.el
+	cp -p essh.el ${SITELISP}/
+	$(EMACSBATCH) -f batch-byte-compile ${SITELISP}/essh.el
+	cp -p hfyview.el ${SITELISP}/
+	$(EMACSBATCH) -f batch-byte-compile ${SITELISP}/hfyview.el
 	sed -e 's/<VERSION>/${VERSION}/' \
 	    -e 's/<EMACSVERSION>/${EMACSVERSION}/' \
 	    -e 's/<DISTNAME>/${DISTNAME}/' \
