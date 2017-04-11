@@ -23,7 +23,7 @@ EMACSBATCH = $(EMACS) -batch -no-site-file -no-init-file
 
 ## Inno Setup info
 INNOSCRIPT=emacs-modified.iss
-INNOSETUP="c:/Program Files (x86)/Inno Setup 5/iscc.exe"
+INNOSETUP=c:/PROGRA~2/INNOSE~1/iscc.exe
 INFOBEFOREFR=InfoBefore-fr.txt
 INFOBEFOREEN=InfoBefore-en.txt
 
@@ -35,10 +35,6 @@ DOCDIR=${DESTDIR}/doc
 INFODIR=${DESTDIR}/info
 
 ## Base name of extensions
-ESS=ess-${ESSVERSION}
-AUCTEX=auctex-${AUCTEXVERSION}
-ORG=org-${ORGVERSION}
-POLYMODE=polymode-master
 LIBPNG=libpng-${LIBPNGVERSION}-w32-bin
 ZLIB=zlib-${ZLIBVERSION}-w32-bin
 JPEG=jpeg-${JPEGVERSION}-w32-bin
@@ -50,13 +46,13 @@ LIBS=libs
 
 all : get-packages emacs release
 
-get-packages : get-emacs get-ess get-auctex get-org get-polymode get-markdownmode get-psvn get-libs
+get-packages : get-psvn get-libs
 
-emacs : dir libs ess auctex org polymode markdownmode psvn exe
+emacs : dir libs psvn exe
 
 release : create-release upload publish
 
-.PHONY : emacs dir libs ess auctex org polymode psvn exe release create-release upload publish clean
+.PHONY : emacs dir libs psvn exe release create-release upload publish clean
 
 dir :
 	@echo ----- Creating the application in temporary directory...
@@ -81,11 +77,6 @@ dir :
 	    -e 's/<DISTNAME>/${DISTNAME}/' \
 	    ${INNOSCRIPT}.in > ${TMPDIR}/${INNOSCRIPT}
 	sed -e 's/<VERSION>/${VERSION}/' \
-	    -e 's/<ESSVERSION>/${ESSVERSION}/' \
-	    -e 's/<AUCTEXVERSION>/${AUCTEXVERSION}/' \
-	    -e 's/<ORGVERSION>/${ORGVERSION}/' \
-	    -e 's/<POLYMODEVERSION>/${POLYMODEVERSION}/' \
-	    -e 's/<MARKDOWNMODEVERSION>/${MARKDOWNMODEVERSION}/' \
 	    -e 's/<PSVNVERSION>/${PSVNVERSION}/' \
 	    -e 's/<LIBPNGVERSION>/${LIBPNGVERSION}/' \
 	    -e 's/<ZLIBVERSION>/${ZLIBVERSION}/' \
@@ -111,61 +102,6 @@ libs :
 	cp -p ${LIBS}/* ${PREFIX}/bin
 	rm -rf ${LIBS}
 	@echo ----- Done copying the libraries
-
-ess :
-	@echo ----- Making ESS...
-	if [ -d ${ESS} ]; then rm -rf ${ESS}; fi
-	unzip ${ESS}.zip
-	TMPDIR=${TMP} ${MAKE} EMACS=${EMACS} -C ${ESS} all
-	${MAKE} DESTDIR=${DESTDIR} SITELISP=${SITELISP} \
-	        ETCDIR=${ETCDIR}/ess DOCDIR=${DOCDIR}/ess \
-	        INFODIR=${INFODIR} -C ${ESS} install
-	if [ -f ${SITELISP}/ess-site.el ]; then rm ${SITELISP}/ess-site.el; fi
-	rm -rf ${ESS}
-	@echo ----- Done making ESS
-
-auctex :
-	@echo ----- Making AUCTeX...
-	if [ -d ${AUCTEX} ]; then rm -rf ${AUCTEX}; fi
-	unzip ${AUCTEX}.zip
-	cd ${AUCTEX} && ./configure --prefix=${PREFIX} \
-		--without-texmf-dir \
-		--with-emacs=${EMACS}
-	make -C ${AUCTEX}
-	make -C ${AUCTEX} install
-	mv ${SITELISP}/auctex/doc/preview.* ${DOCDIR}/auctex
-	rmdir ${SITELISP}/auctex/doc
-	rm -rf ${AUCTEX}
-	@echo ----- Done making AUCTeX
-
-org :
-	@echo ----- Making org...
-	if [ -d ${ORG} ]; then rm -rf ${ORG}; fi
-	unzip ${ORG}.zip
-	${MAKE} EMACS=${EMACS} -C ${ORG} all
-	${MAKE} EMACS=${EMACS} lispdir=${SITELISP}/org \
-	        datadir=${ETCDIR}/org infodir=${INFODIR} -C ${ORG} install
-	mkdir -p ${DOCDIR}/org && cp -p ${ORG}/doc/*.html ${DOCDIR}/org/
-	rm -rf ${ORG}
-	@echo ----- Done making org
-
-polymode :
-	@echo ----- Copying and byte compiling polymode files...
-	if [ -d ${POLYMODE} ]; then rm -rf ${POLYMODE}; fi
-	unzip ${POLYMODE}.zip
-	mkdir -p ${SITELISP}/polymode ${DOCDIR}/polymode
-	cp -p ${POLYMODE}/*.el ${POLYMODE}/modes/*.el ${SITELISP}/polymode
-	$(EMACSBATCH) -f batch-byte-compile ${SITELISP}/polymode/*.el
-	cp -p ${POLYMODE}/readme.md ${DOCDIR}/polymode
-	cp -p ${POLYMODE}/modes/readme.md ${DOCDIR}/polymode/developing.md
-	rm -rf ${POLYMODE}
-	@echo ----- Done installing polymode
-
-markdownmode :
-	@echo ----- Copying and byte compiling markdown-mode.el...
-	cp -p markdown-mode.el ${SITELISP}/
-	$(EMACSBATCH) -f batch-byte-compile ${SITELISP}/markdown-mode.el
-	@echo ----- Done installing markdown-mode.el
 
 psvn :
 	@echo ----- Patching and byte compiling psvn.el...
@@ -218,31 +154,6 @@ get-emacs :
 	@echo ----- Fetching and unpacking Emacs...
 	if [ -f ${ZIPFILE} ]; then rm ${ZIPFILE}; fi
 	curl -O ftp://ftp.gnu.org/gnu/emacs/windows/${ZIPFILE}
-
-get-ess :
-	@echo ----- Fetching ESS...
-	if [ -d ${ESS}.zip ]; then rm ${ESS}.zip; fi
-	curl -O http://ess.r-project.org/downloads/ess/${ESS}.zip
-
-get-auctex :
-	@echo ----- Fetching AUCTeX...
-	if [ -f ${AUCTEX}.zip ]; then rm ${AUCTEX}.zip; fi
-	curl -O http://ftp.gnu.org/pub/gnu/auctex/${AUCTEX}.zip
-
-get-org :
-	@echo ----- Fetching org...
-	if [ -f ${ORG}.zip ]; then rm ${ORG}.zip; fi
-	curl -O http://orgmode.org/${ORG}.zip
-
-get-polymode :
-	@echo ----- Fetching polymode
-	if [ -f ${POLYMODE}.zip ]; then rm ${POLYMODE}.zip; fi
-	curl -L -o ${POLYMODE}.zip https://github.com/vspinu/polymode/archive/master.zip
-
-get-markdownmode :
-	@echo ----- Fetching markdown-mode.el
-	if [ -f markdown-mode.el ]; then rm markdown-mode.el; fi
-	curl -OL https://github.com/jrblevin/markdown-mode/raw/v${MARKDOWNMODEVERSION}/markdown-mode.el
 
 get-psvn :
 	@echo ----- Fetching psvn.el
