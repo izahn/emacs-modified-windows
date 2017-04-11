@@ -90,6 +90,7 @@ dir :
 	    -e 's/<LIBRSVGVERSION>/${LIBRSVGVERSION}/' \
 	    -e 's/<GNUTLSVERSION>/${GNUTLSVERSION}/' \
 		    README-Modified.txt.in > ${TMPDIR}/README-Modified.txt
+	curl --output site-start.el https://raw.githubusercontent.com/izahn/dotemacs/master/init.el
 	cp -p site-start.el NEWS ${TMPDIR}
 
 libs :
