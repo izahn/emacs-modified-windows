@@ -1,13 +1,13 @@
 [Setup]
-AppName=GNU Emacs
-AppVerName=GNU Emacs <VERSION>
-AppId=GNUEmacs<VERSION>
+AppName=GNU Emacs (configured)
+AppVerName=GNU Emacs (configured) <VERSION>
+AppId=GNUEmacsConfigured<VERSION>
 AppPublisher=Ista Zahn
 AppPublisherURL=https://github.com/izahn/emacs-modified-windows
 AppSupportURL=https://github.com/izahn/emacs-modified-windows
 AppUpdatesURL=https://github.com/izahn/emacs-modified-windows
-DefaultDirName={pf}\GNU Emacs <EMACSVERSION>
-DefaultGroupName=GNU Emacs <EMACSVERSION>
+DefaultDirName={pf}\GNU Emacs Configured <EMACSVERSION>
+DefaultGroupName=GNU Emacs Configured <EMACSVERSION>
 LicenseFile=emacs-bin\share\emacs\<EMACSVERSION>\etc\COPYING
 OutputDir=..
 OutputBaseFilename=<DISTNAME>
