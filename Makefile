@@ -72,10 +72,11 @@ dir :
 	$(EMACSBATCH) -f batch-byte-compile ${SITELISP}/htmlize.el
 	cp -p htmlize-view.el ${SITELISP}/
 	$(EMACSBATCH) -f batch-byte-compile ${SITELISP}/htmlize-view.el
-	cp -p essh.el ${SITELISP}/
+	curl --output ${SITELISP}/essh.el https://raw.githubusercontent.com/izahn/dotemacs/master/lisp/essh.el
 	$(EMACSBATCH) -f batch-byte-compile ${SITELISP}/essh.el
-	cp -p hfyview.el ${SITELISP}/
+	curl --output ${SITELISP}/hfyview.el https://raw.githubusercontent.com/izahn/dotemacs/master/lisp/hfyview.el
 	$(EMACSBATCH) -f batch-byte-compile ${SITELISP}/hfyview.el
+	curl --output ${SITELISP}/win-win.el https://raw.githubusercontent.com/izahn/dotemacs/master/lisp/win-win.el
 	sed -e 's/<VERSION>/${VERSION}/' \
 	    -e 's/<EMACSVERSION>/${EMACSVERSION}/' \
 	    -e 's/<DISTNAME>/${DISTNAME}/' \
