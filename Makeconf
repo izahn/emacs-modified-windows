@@ -30,7 +30,7 @@ GNUTLSVERSION=3.4.15
 ### No modification should be necessary beyond this point
 
 ## Version strings and file names
-VERSION=${EMACSVERSION}$(if ${EMACSPATCHLEVEL},-${EMACSPATCHLEVEL},)-modified-${DISTVERSION}
+VERSION=${EMACSVERSION}$(if ${EMACSPATCHLEVEL},-${EMACSPATCHLEVEL},)-configured-${DISTVERSION}
 DISTNAME=emacs-${VERSION}
 ARCH=i686-w64-mingw32
 ZIPFILE=emacs-${EMACSVERSION}$(if ${EMACSPATCHLEVEL},-${EMACSPATCHLEVEL},)-${ARCH}.zip
